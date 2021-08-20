@@ -1,11 +1,13 @@
 import React from 'react'
+import Dashboard from '../dashboard/Dashboard'
+import './Home.css'
 
 const Home = () => {
     return (
-        <div>
-            DashBoard
-        </div>
+        <>
+           <Dashboard/>
+        </>
     )
 }
 
-export default Home
+export default Home;
