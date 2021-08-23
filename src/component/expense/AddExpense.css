@@ -1,0 +1,11 @@
+.main_container{
+    background-color: white;
+    display: grid;
+    place-items: center;
+    width: 73vw;
+    margin-top: 44px;
+    margin-left: 59px;
+    height: 60vh;
+    box-shadow: 0px 0px 10px;
+}
+
