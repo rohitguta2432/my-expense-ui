@@ -1,5 +1,5 @@
 .main_container{
-    background-color: white;
+    background-color: rgba(127, 143, 166,1.0);
     display: grid;
     place-items: center;
     width: 73vw;
@@ -17,6 +17,7 @@
     align-items: center;
 }
 input[type="text"],select,input[type="number"]{
+    width: 210px;
     height: 33px;
     padding: 2px;
     text-align: center;
@@ -24,5 +25,19 @@ input[type="text"],select,input[type="number"]{
     border: 1px solid #ccc;
 }
 select{
-    width:164px;
+    width: 210px;
+    margin-left: 26px;
+}
+input[type="submit"]{
+    height: 33px;
+    width: 210px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: green;
+    color: white;
+}
+.add_category{
+    font-size: 25px;
+    margin-left: 2px;
 }
