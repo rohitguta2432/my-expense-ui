@@ -8,4 +8,21 @@
     height: 60vh;
     box-shadow: 0px 0px 10px;
 }
-
+.expense_date,
+.category_expense,
+.amount_expense{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+input[type="text"],select,input[type="number"]{
+    height: 33px;
+    padding: 2px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+select{
+    width:164px;
+}

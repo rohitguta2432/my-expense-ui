@@ -7,27 +7,27 @@ const AddExpense = () => {
     return (
         <>
             <div className="main_container">
-                <div className="expense_date">
+                <div className="expense_date form-group">
                     <lable className="date">
                         Date :
-                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                     </lable>
+                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                 </div>
                 <div className="category_expense">
                     <label htmlFor="expense">
                         Category :
-                        <select name="" id="">
-                            <option value="">Food</option>
-                            <option value="">HouseHold</option>
-                            <option value="">grociery</option>
-                        </select>
                     </label>
+                    <select name="" id="">
+                        <option value="">Food</option>
+                        <option value="">HouseHold</option>
+                        <option value="">grociery</option>
+                    </select>
                 </div>
                 <div className="amount_expense">
                     <label htmlFor="" className="amount">
                         Amount :
-                        <input type="number" placeholder="Amount" />
-                    </label>
+                     </label>
+                    <input type="number" placeholder="Amount" />
                 </div>
                 <input type="submit" value="submit" />
             </div>
