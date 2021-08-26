@@ -1,0 +1,27 @@
+.container_cate{
+    background-color: rgba(127, 143, 166,1.0);
+    display: grid;
+    place-items: center;
+    width: 73vw;
+    margin-top: 44px;
+    margin-left: 59px;
+    height: 60vh;
+    box-shadow: 0px 0px 10px;
+}
+.category_submit{
+    height: 33px;
+    width: 210px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: green;
+    color: white;
+    margin-bottom: 184px;
+}
+hr{
+    width:200px;
+}
+.go_back{
+    color: #ffffff;
+    font-size: 22px;
+}

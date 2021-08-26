@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Home from './component/home/Home';
 import AddExpense from './component/expense/AddExpense';
+import Category from './component/catgory/Category';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Router>
         <Route path="/" exact component={Home} />
         <Route path="/expense" exact component={AddExpense} />
+        <Route path="/category" exact component={Category} />
       </Router>
     </>
   );

@@ -3,37 +3,37 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 import './AddExpense.css'
 import { FcPlus } from 'react-icons/fc'
+import { useHistory } from 'react-router-dom'
+import { FaAngleLeft } from 'react-icons/fa'
 
 const AddExpense = () => {
     const [startDate, setStartDate] = useState(new Date())
+    const history = useHistory();
+    const addCategory = () => {
+        console.log('add category');
+        history.push("/category");
+    }
     return (
         <>
             <div className="main_container">
+            <FaAngleLeft className="go_back" onClick={history.goBack}/>
                 <div className="expense_date form-group">
-                    {/* <lable className="date">
-                        Date :
-                    </lable> */}
-                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} placeholder="date"/>
+                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                 </div>
                 <div className="category_expense">
-                    {/* <label htmlFor="expense">
-                        Category :
-                    </label> */}
                     <select name="" id="">
                         <option value="">Select Category</option>
                         <option value="">Food</option>
                         <option value="">HouseHold</option>
                         <option value="">grociery</option>
                     </select>
-                    <FcPlus className="add_category"/>
+                    <FcPlus className="add_category" onClick={addCategory} />
                 </div>
                 <div className="amount_expense">
-                    {/* <label htmlFor="" className="amount">
-                        Amount :
-                     </label> */}
+
                     <input type="number" placeholder="Amount" />
                 </div>
-                <input type="submit" value="submit" />
+                <input type="submit" value="submit" className="expense_submit"/>
             </div>
         </>
     )

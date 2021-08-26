@@ -28,7 +28,7 @@ select{
     width: 210px;
     margin-left: 26px;
 }
-input[type="submit"]{
+.expense_submit{
     height: 33px;
     width: 210px;
     text-align: center;
