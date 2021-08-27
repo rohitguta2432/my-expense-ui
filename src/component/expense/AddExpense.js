@@ -12,17 +12,35 @@ import Axios from 'axios';
 const AddExpense = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [category, setCategory] = useState([]);
+    const [expense, setExpense] = useState({
+        expenseDate: "",
+        amount: "",
+        categoryId: ""
+    });
     const history = useHistory();
 
     const addCategory = () => {
         history.push("/category");
     }
 
+    const handleInput = (e) => {
+        setExpense({ ...expense, [e.target.name]: e.target.value, "expenseDate": startDate })
+    }
+
+    const createExpense = (e) => {
+        e.preventDefault();
+
+        Axios.post(ENV.URL + 'expense', expense)
+            .then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
 
     useEffect(() => {
         Axios.get(ENV.URL + 'category')
             .then((response) => {
-                //console.log(response.data);
                 setCategory(response.data);
             }).catch((error) => {
                 console.log(error);
@@ -31,28 +49,31 @@ const AddExpense = () => {
 
     return (
         <>
-            <div className="main_container">
-                <FaAngleLeft className="go_back" onClick={history.goBack} />
-                <div className="expense_date form-group">
-                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+            <form action="" onSubmit={createExpense}>
+                <div className="main_container">
+                    <FaAngleLeft className="go_back" onClick={history.goBack} />
+                    <div className="expense_date form-group">
+                        <DatePicker selected={startDate} value={startDate} id="expenseDate" name="expenseDate"
+                            onChange={(date) => setStartDate(date)} />
+                    </div>
+                    <div className="category_expense">
+                        <select id="categoryId" name="categoryId" onChange={handleInput}>
+                            <option value="">Select Category</option>
+                            {
+                                category.map((value) => {
+                                    return <option key={value.categoryId} id="categoryId" name="categoryId"
+                                        value={value.categoryId} onChange={handleInput}>{value.name}</option>
+                                })
+                            }
+                        </select>
+                        <FcPlus className="add_category" onClick={addCategory} />
+                    </div>
+                    <div className="amount_expense">
+                        <input type="number" placeholder="Amount" id="amount" name="amount" value={expense.amount} onChange={handleInput} />
+                    </div>
+                    <input type="submit" value="submit" className="expense_submit" />
                 </div>
-                <div className="category_expense">
-                    <select>
-                        <option value="">Select Category</option>
-                        {
-                            category.map((value) => {
-                                return <option key={value.id} value={value.id}>{value.name}</option>
-                            })
-                        }
-                    </select>
-                    <FcPlus className="add_category" onClick={addCategory} />
-                </div>
-                <div className="amount_expense">
-
-                    <input type="number" placeholder="Amount" />
-                </div>
-                <input type="submit" value="submit" className="expense_submit" />
-            </div>
+            </form>
         </>
     )
 }
