@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom'
 import { FaAngleLeft } from 'react-icons/fa'
 import { ENV } from '../environment/EnvrUrl'
 import Axios from 'axios';
-
+import { useParams } from 'react-router-dom'
 
 const AddExpense = () => {
     const [startDate, setStartDate] = useState(new Date())
@@ -18,6 +18,7 @@ const AddExpense = () => {
         categoryId: ""
     });
     const history = useHistory();
+    const { id } = useParams();
 
     const addCategory = () => {
         history.push("/category");
@@ -47,6 +48,16 @@ const AddExpense = () => {
             })
     }, []);
 
+    useEffect(() => {
+        Axios.get(ENV.URL + "expense/" + id)
+            .then((res) => {
+                setExpense(res.data)
+            }).catch((res) => {
+                console.log(res);
+            })
+    }, [])
+
+    console.log(expense);
     return (
         <>
             <form action="" onSubmit={createExpense}>

@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import Axios from 'axios';
+import { ENV } from '../environment/EnvrUrl'
 
 const data = [
     { name: "Group A", value: 400 },
@@ -36,7 +38,19 @@ const renderCustomizedLabel = ({
         </text>
     );
 };
+
+
 const Dashboard = () => {
+    const [chartData, setChartData] = useState([]);
+
+    useEffect(() => {
+        Axios.get(ENV.URL + 'expense/monthly')
+            .then((response) => {
+                setChartData(response.data)
+            }).catch((reponse) => {
+                console.log(reponse);
+            })
+    }, [])
     return (
         <>
             <PieChart width={400} height={400}>
