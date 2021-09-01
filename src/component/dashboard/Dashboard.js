@@ -41,7 +41,10 @@ const renderCustomizedLabel = ({
 
 
 const Dashboard = () => {
-    const [chartData, setChartData] = useState([]);
+    const [chartData, setChartData] = useState([{
+        category:"",
+        amountCess:""
+    }]);
 
     useEffect(() => {
         Axios.get(ENV.URL + 'expense/monthly')
@@ -51,20 +54,21 @@ const Dashboard = () => {
                 console.log(reponse);
             })
     }, [])
+    console.log(chartData)
     return (
         <>
             <PieChart width={400} height={400}>
                 <Pie
-                    data={data}
+                    data={chartData}
                     cx={200}
                     cy={200}
                     labelLine={false}
                     label={renderCustomizedLabel}
                     outerRadius={80}
                     fill="#8884d8"
-                    dataKey="value"
+                    dataKey="amountCess"
                 >
-                    {data.map((entry, index) => (
+                    {chartData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                 </Pie>

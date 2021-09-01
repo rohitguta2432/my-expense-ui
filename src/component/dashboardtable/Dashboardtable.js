@@ -23,7 +23,7 @@ const Dashboardtable = () => {
     }
 
     return (
-        <table>
+        <table className="home_table">
             <thead>
                 <tr>
                     <th>Date</th>

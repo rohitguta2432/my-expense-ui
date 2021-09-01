@@ -3,10 +3,11 @@
     display: grid;
     place-items: center;
     width: 73vw;
-    margin-top: 44px;
+    margin-top: 27px;
     margin-left: 59px;
-    height: 60vh;
+    height: 83vh;
     box-shadow: 0px 0px 10px;
+    position: relative;
 }
 .category_submit{
     height: 33px;
@@ -16,7 +17,7 @@
     border: 2px solid #ccc;
     background-color: green;
     color: white;
-    margin-bottom: 184px;
+    margin-bottom: 267px;
 }
 hr{
     width:200px;
@@ -25,3 +26,63 @@ hr{
     color: #ffffff;
     font-size: 22px;
 }
+
+/* table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  table tr:hover {background-color: #ddd;}
+  
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: rgba(127, 143, 166,1.0);
+    color: white;
+  } */
+  
+  .td_cat{
+      background-color: #f2f2f2;
+  }
+  .edit_cat{
+    color: green;
+  }
+  .delete_cat{
+      color: red;
+      margin-left: 19px;
+  }
+  .table_cate{
+    position: fixed;
+    bottom: 17px;
+    left: 109px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 49%;
+    top: 412px;
+    overflow: scroll;
+  }
+  .table_cate td, .table_cate th {
+    border: 1px solid #ddd;
+    padding: 3px;
+  }
+  
+  .table_cate tr:nth-child(even){background-color: #f2f2f2;}
+  
+  .table_cate tr:hover {background-color: #ddd;}
+  
+.table_cate th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: rgba(127, 143, 166,1.0);
+    color: white;
+  }
