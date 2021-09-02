@@ -5,7 +5,12 @@ import { useHistory } from 'react-router-dom'
 import Axios from 'axios';
 import { ENV } from '../environment/EnvrUrl'
 import { RiDeleteBin5Line, RiEdit2Line } from 'react-icons/ri';
+import { Snackbar } from '@material-ui/core'
+import MuiAlert from '@material-ui/lab/Alert';
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const Category = () => {
     const history = useHistory();
     const [categoryObj, setCategoryObj] = useState({
@@ -14,7 +19,10 @@ const Category = () => {
     });
 
     const [categoryArr, setCategoryArr] = useState([]);
-
+    const [message, setMessage] = useState();
+    const [deleteMessage, setDeleteMessage] = useState();
+    const [open, setOpen] = useState(false)
+    const [errorOpen, setErrorOpen] = useState(false)
     const handleInput = (e) => {
         setCategoryObj({ ...categoryObj, [e.target.name]: e.target.value });
     }
@@ -22,23 +30,27 @@ const Category = () => {
     const createCategory = (e) => {
         e.preventDefault();
 
-        console.log(categoryObj);
-
-        Axios.post(ENV.URL + 'category', categoryObj)
-            .then((res) => {
-                console.log(res);
-                fetchCategory()
-            }).catch((err) => {
-                console.log(err);
-            })
-
+        if (categoryObj.name !== '') {
+            console.log(categoryObj)
+            Axios.post(ENV.URL + 'category', categoryObj)
+                .then((res) => {
+                    fetchCategory()
+                }).catch((err) => {
+                    console.log(err);
+                })
+            setOpen(true)
+            if (categoryObj.categoryId === '') {
+                setMessage("Category Created Successfully!")
+            } else {
+                setMessage("Category Updated Successfully!")
+            }
+        }
     }
 
 
     const fetchCategory = () => {
         Axios.get(ENV.URL + 'category')
             .then((res) => {
-                console.log(res)
                 setCategoryArr(res.data)
             }).catch((res) => {
                 console.log(res)
@@ -48,7 +60,6 @@ const Category = () => {
     useEffect(() => {
         Axios.get(ENV.URL + 'category')
             .then((res) => {
-                console.log(res)
                 setCategoryArr(res.data)
             }).catch((res) => {
                 console.log(res)
@@ -56,29 +67,47 @@ const Category = () => {
     }, [])
 
     const editCategory = (id) => {
-        console.log('edit')
         Axios.get(ENV.URL + 'category/' + id)
             .then((response) => {
-                console.log(response)
                 setCategoryObj(response.data)
             }).catch((response) => {
                 console.log(response)
             })
+
     }
 
     const deleteCategroy = (id) => {
-        console.log('delete')
         Axios.delete(ENV.URL + 'category/' + id)
             .then((res) => {
                 fetchCategory();
             }).catch((res) => {
                 console.log(res)
             })
+        setErrorOpen(true)
+        setDeleteMessage("Category Deleted Successfully!")
     }
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+        setErrorOpen(false);
+    };
     return (
         <>
             <form action="" onSubmit={createCategory}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+                    <Alert onClose={handleClose} severity="success">
+                        {message}
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={errorOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+                    <Alert onClose={handleClose} severity="error">
+                        {deleteMessage}
+                    </Alert>
+                </Snackbar>
                 <div className="container_cate">
                     <FaAngleLeft className="go_back" onClick={history.goBack} />
                     <input type="text" placeholder="Category" id="name" name="name" value={categoryObj.name}
@@ -88,31 +117,32 @@ const Category = () => {
                         <input type="submit" value="submit" className="category_submit" />
                     </div>
 
-                </div>
-                <div className="table_category">
+                    <div className="table_category">
 
-                    <table className="table_cate">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                categoryArr.map((value) => {
-                                    return (<tr key={value.categoryId}>
-                                        <td className="td_cat">{value.name}</td>
-                                        <td> <RiEdit2Line className="edit_cat" onClick={() => editCategory(value.categoryId)} />
-                                            <RiDeleteBin5Line className="delete_cat" onClick={() => deleteCategroy(value.categoryId)} />
-                                        </td>
-                                    </tr>)
-                                })
-                            }
+                        <table className="table_cate">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    categoryArr.map((value) => {
+                                        return (<tr key={value.categoryId}>
+                                            <td className="td_cat">{value.name}</td>
+                                            <td> <RiEdit2Line className="edit_cat" onClick={() => editCategory(value.categoryId)} />
+                                                <RiDeleteBin5Line className="delete_cat" onClick={() => deleteCategroy(value.categoryId)} />
+                                            </td>
+                                        </tr>)
+                                    })
+                                }
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
             </form>
 
 

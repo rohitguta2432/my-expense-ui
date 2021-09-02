@@ -26,30 +26,6 @@ hr{
     color: #ffffff;
     font-size: 22px;
 }
-
-/* table {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  table td, table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  table tr:nth-child(even){background-color: #f2f2f2;}
-  
-  table tr:hover {background-color: #ddd;}
-  
-table th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: rgba(127, 143, 166,1.0);
-    color: white;
-  } */
-  
   .td_cat{
       background-color: #f2f2f2;
   }
@@ -60,7 +36,7 @@ table th {
       color: red;
       margin-left: 19px;
   }
-  .table_cate{
+  /* .table_cate{
     position: fixed;
     bottom: 17px;
     left: 109px;
@@ -69,10 +45,10 @@ table th {
     width: 49%;
     top: 412px;
     overflow: scroll;
-  }
+  } */
   .table_cate td, .table_cate th {
     border: 1px solid #ddd;
-    padding: 3px;
+    padding: 1px;
   }
   
   .table_cate tr:nth-child(even){background-color: #f2f2f2;}
@@ -80,9 +56,21 @@ table th {
   .table_cate tr:hover {background-color: #ddd;}
   
 .table_cate th {
-    padding-top: 12px;
-    padding-bottom: 12px;
+  padding-top: 10px;
+    padding-bottom: -4px;
+    padding-right: 50px;
     text-align: center;
     background-color: rgba(127, 143, 166,1.0);
     color: white;
+  }
+  .table_category{
+    position: fixed;
+    bottom: 98px;
+    left: 97px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 61%;
+    right: -43px;
+    top: 401px;
+    overflow: scroll;
   }

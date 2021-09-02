@@ -6,3 +6,8 @@
 body{
     background-color: #f1f3f6;
 }
+/* @media (max-width: 300px){
+    Navbar > nav{
+        width: 100%;
+    }
+} */
