@@ -2,49 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 import Axios from 'axios';
 import { ENV } from '../environment/EnvrUrl'
+import CanvasJSReact from '../../assets/canvasjs.react';
 
-const data = [
-    { name: "Group A", value: 400 },
-    { name: "Group B", value: 300 },
-    { name: "Group C", value: 300 },
-    { name: "Group D", value: 200 }
-];
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    index
-}: any) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-        <text
-            x={x}
-            y={y}
-            fill="white"
-            textAnchor={x > cx ? "start" : "end"}
-            dominantBaseline="central"
-        >
-            {`${(percent * 100).toFixed(0)}%`}
-        </text>
-    );
-};
-
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const Dashboard = () => {
     const [chartData, setChartData] = useState([{
-        category:"",
-        amountCess:""
+        label: "",
+        y: ''
     }]);
+    const chartRef = React.createRef();
 
     useEffect(() => {
         Axios.get(ENV.URL + 'expense/monthly')
@@ -54,25 +21,28 @@ const Dashboard = () => {
                 console.log(reponse);
             })
     }, [])
-    console.log(chartData)
+    //console.log(chartData)
+    const options = {
+        exportEnabled: false,
+        animationEnabled: false,
+        title: {
+            text: "My Expenses"
+        },
+        data: [{
+            type: "pie",
+            startAngle: 75,
+            toolTipContent: "<b>{lable} </b>: {y}%",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 14,
+            indexLabel: "{label} - {y}%",
+            dataPoints: chartData
+        }]
+    }
     return (
         <>
-            <PieChart width={400} height={400}>
-                <Pie
-                    data={chartData}
-                    cx={200}
-                    cy={200}
-                    labelLine={false}
-                    label={renderCustomizedLabel}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="amountCess"
-                >
-                    {chartData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Pie>
-            </PieChart>
+           <CanvasJSChart options={options}
+           ref = {chartRef} />
         </>
     )
 }
