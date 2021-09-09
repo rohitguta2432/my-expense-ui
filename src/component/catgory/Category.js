@@ -17,7 +17,7 @@ const Category = () => {
         categoryId: "",
         name: ""
     });
-
+    const token = localStorage.getItem('token');
     const [categoryArr, setCategoryArr] = useState([]);
     const [message, setMessage] = useState();
     const [deleteMessage, setDeleteMessage] = useState();
@@ -32,7 +32,11 @@ const Category = () => {
 
         if (categoryObj.name !== '') {
             console.log(categoryObj)
-            Axios.post(ENV.URL + 'category', categoryObj)
+            Axios.post(ENV.URL + 'category', categoryObj, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
                 .then((res) => {
                     fetchCategory()
                 }).catch((err) => {
@@ -49,7 +53,11 @@ const Category = () => {
 
 
     const fetchCategory = () => {
-        Axios.get(ENV.URL + 'category')
+        Axios.get(ENV.URL + 'category', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((res) => {
                 setCategoryArr(res.data)
             }).catch((res) => {
@@ -58,7 +66,11 @@ const Category = () => {
     }
 
     useEffect(() => {
-        Axios.get(ENV.URL + 'category')
+        Axios.get(ENV.URL + 'category', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((res) => {
                 setCategoryArr(res.data)
             }).catch((res) => {
@@ -67,7 +79,11 @@ const Category = () => {
     }, [])
 
     const editCategory = (id) => {
-        Axios.get(ENV.URL + 'category/' + id)
+        Axios.get(ENV.URL + 'category/' + id, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 setCategoryObj(response.data)
             }).catch((response) => {
@@ -77,7 +93,11 @@ const Category = () => {
     }
 
     const deleteCategroy = (id) => {
-        Axios.delete(ENV.URL + 'category/' + id)
+        Axios.delete(ENV.URL + 'category/' + id,{
+            headers:{
+                'Authorization':`Bearer ${token}`
+            }
+        })
             .then((res) => {
                 fetchCategory();
             }).catch((res) => {

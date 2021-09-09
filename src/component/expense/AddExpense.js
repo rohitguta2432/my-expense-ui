@@ -29,7 +29,7 @@ const AddExpense = () => {
     });
     const [categoryId, setCategoryId] = useState("");
     const [message, setMessage] = useState();
-
+    const token = localStorage.getItem('token');
     const history = useHistory();
     const { id } = useParams();
 
@@ -44,7 +44,11 @@ const AddExpense = () => {
     const createExpense = (e) => {
         e.preventDefault();
 
-        Axios.post(ENV.URL + 'expense', expense)
+        Axios.post(ENV.URL + 'expense', expense,{
+            headers:{
+                'Authorization':`Bearer ${token}`
+            }
+        })
             .then((response) => {
                 console.log(response);
             }).catch((error) => {
@@ -60,7 +64,11 @@ const AddExpense = () => {
     }
 
     useEffect(() => {
-        Axios.get(ENV.URL + 'category')
+        Axios.get(ENV.URL + 'category',{
+            headers:{
+                'Authorization':`Bearer ${token}`
+            }
+        })
             .then((response) => {
                 setCategory(response.data);
 
@@ -71,7 +79,11 @@ const AddExpense = () => {
 
     // fetch by id expense
     useEffect(() => {
-        Axios.get(ENV.URL + "expense/" + id)
+        Axios.get(ENV.URL + "expense/" + id,{
+            headers:{
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((res) => {
                 setExpense(res.data)
                 setCategoryId(res.data.categoryId)

@@ -11,10 +11,16 @@ const Dashboard = () => {
         label: "",
         y: ''
     }]);
+    const token = localStorage.getItem('token');
+    console.log(token)
     const chartRef = React.createRef();
 
     useEffect(() => {
-        Axios.get(ENV.URL + 'expense/monthly')
+        Axios.get(ENV.URL + 'expense/monthly', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 setChartData(response.data)
             }).catch((reponse) => {
@@ -34,15 +40,15 @@ const Dashboard = () => {
             toolTipContent: "<b>{lable} </b>: {y}%",
             showInLegend: "true",
             legendText: "{label}",
-            indexLabelFontSize: 14,
+            indexLabelFontSize: 15,
             indexLabel: "{label} - {y}%",
             dataPoints: chartData
         }]
     }
     return (
         <>
-           <CanvasJSChart options={options}
-           ref = {chartRef} />
+            <CanvasJSChart options={options}
+                ref={chartRef} />
         </>
     )
 }

@@ -7,9 +7,14 @@ import { useHistory } from 'react-router-dom'
 const Dashboardtable = () => {
     const [expense, setExpense] = useState([]);
     const history = useHistory();
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        Axios.get(ENV.URL + 'expense')
+        Axios.get(ENV.URL + 'expense',{
+            headers:{
+                'Authorization':`Bearer ${token}`
+            }
+        })
             .then((response) => {
                 setExpense(response.data)
             }).catch((error) => {
