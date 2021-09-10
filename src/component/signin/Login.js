@@ -12,6 +12,7 @@ const Login = () => {
         password: ""
     })
     const history = useHistory();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleInput = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -23,8 +24,10 @@ const Login = () => {
         Axios.post(ENV.URL + 'auth', user)
             .then((response) => {
                 if (response.status === 200) {
+                    localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('isAuthenticated', true);
                     history.push('/home')
-                    localStorage.setItem('token',response.data.token);
+                   
                 } else {
                     alert('Invalid crendials')
                 }

@@ -12,7 +12,6 @@ const Dashboard = () => {
         y: ''
     }]);
     const token = localStorage.getItem('token');
-    console.log(token)
     const chartRef = React.createRef();
 
     useEffect(() => {
