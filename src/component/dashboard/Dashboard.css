@@ -1,0 +1,10 @@
+.chart_dashboard{
+    margin-top: 10px;
+    max-width: 40rem;
+}
+@media screen and (max-width:2000px){
+    .chart_dashboard{
+        max-width: 150rem;
+        
+    }
+}

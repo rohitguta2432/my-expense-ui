@@ -3,6 +3,7 @@ import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 import Axios from 'axios';
 import { ENV } from '../environment/EnvrUrl'
 import CanvasJSReact from '../../assets/canvasjs.react';
+import './Dashboard.css'
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -46,8 +47,10 @@ const Dashboard = () => {
     }
     return (
         <>
+        <div className="chart_dashboard">
             <CanvasJSChart options={options}
                 ref={chartRef} />
+                </div>
         </>
     )
 }
