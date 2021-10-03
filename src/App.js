@@ -6,6 +6,7 @@ import AddExpense from './component/expense/AddExpense';
 import Category from './component/catgory/Category';
 import Login from './component/signin/Login';
 import UnAuthorize from './component/unauthorized/UnAuthorize';
+import SignUp from './component/signup/SignUp';
 function App() {
   const isLoggedIn = localStorage.getItem('isAuthenticated');
   return (
@@ -41,6 +42,9 @@ function App() {
             return <UnAuthorize />
           }
         }} />
+        <Route path="/signup" exact render={props => {
+            return <SignUp/>
+        }}/>  
       </Router>
     </>
   );

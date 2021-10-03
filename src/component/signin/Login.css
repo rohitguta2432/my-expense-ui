@@ -10,8 +10,8 @@
     height: 14rem;
     box-shadow: 0px 0px 8px;
 }
-.username,
-.password{
+.child_containers input[type="text"],
+.child_containers input[type="password"]{
     width: 210px;
     height: 33px;
     padding: 2px;
@@ -29,4 +29,8 @@
     width: 90px;
     height: 26px;
     color: #ffffff;
+}
+.signUp{
+    color: darkcyan;
+    margin: 0px 2px 0px 9px;
 }

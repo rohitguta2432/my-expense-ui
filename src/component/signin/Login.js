@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import './Login.css'
 import Axios from 'axios'
 import { ENV } from '../environment/EnvrUrl'
@@ -34,7 +34,6 @@ const Login = () => {
             }).catch((res) => {
                 console.log(res)
             })
-
     }
 
     return (
@@ -51,9 +50,8 @@ const Login = () => {
                         <input type="password" placeholder="password" className="password" id="password" name="password"
                             autoComplete="off"
                             value={user.password} onChange={handleInput} />
-
+                        <Link to="/signup" className="signUp">Sign Up</Link>
                         <input type="submit" value="submit" className="login_btn" />
-
                     </div>
                 </div>
             </form>
