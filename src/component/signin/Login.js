@@ -47,7 +47,7 @@ const Login = () => {
                             autoComplete="off"
                             value={user.username} onChange={handleInput} />
 
-                        <input type="password" placeholder="password" className="password" id="password" name="password"
+                        <input type="password" placeholder="password" className="password" id="password" name="password" 
                             autoComplete="off"
                             value={user.password} onChange={handleInput} />
                         <Link to="/signup" className="signUp">Sign Up</Link>
