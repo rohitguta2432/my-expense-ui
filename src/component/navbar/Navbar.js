@@ -3,19 +3,21 @@ import './Navbar.css'
 import { FcPlus } from 'react-icons/fc'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'
-import {useHistory} from 'react-router-dom'
-import {BiLogOut} from 'react-icons/bi'
+import { useHistory } from 'react-router-dom'
+import { BiLogOut } from 'react-icons/bi'
 
 
 const Navbar = () => {
     const [value, onChange] = useState(new Date());
     const history = useHistory();
-    const addExpense = () =>{
+    const addExpense = () => {
         console.log('add expense');
         history.push("/expense");
     }
-    const onLogout = () =>{
-            history.push('/');
+    const onLogout = () => {
+        localStorage.setItem('token', '');
+        localStorage.setItem('isAuthenticated', false);
+        history.push('/');
     }
 
     return (
@@ -26,10 +28,10 @@ const Navbar = () => {
                     </li>
                     <li className="add_item">
                         <div className="add_expense_parent">
-                        <FcPlus className="add_icon" onClick={addExpense}/>
+                            <FcPlus className="add_icon" onClick={addExpense} />
                         </div>
                         <div className="logout_parent" onClick={onLogout}>
-                        <BiLogOut className="logout_icon"/>
+                            <BiLogOut className="logout_icon" />
                         </div>
                     </li>
                 </ul>
