@@ -93,9 +93,9 @@ const Category = () => {
     }
 
     const deleteCategroy = (id) => {
-        Axios.delete(ENV.URL + 'category/' + id,{
-            headers:{
-                'Authorization':`Bearer ${token}`
+        Axios.delete(ENV.URL + 'category/' + id, {
+            headers: {
+                'Authorization': `Bearer ${token}`
             }
         })
             .then((res) => {
@@ -117,6 +117,8 @@ const Category = () => {
     };
     return (
         <>
+        
+        <div className="parent_category">
             <form action="" onSubmit={createCategory}>
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
                     <Alert onClose={handleClose} severity="success">
@@ -130,42 +132,46 @@ const Category = () => {
                 </Snackbar>
                 <div className="container_cate">
                     <FaAngleLeft className="go_back" onClick={history.goBack} />
+
+                    <div className="category_name">
                     <input type="text" placeholder="Category" id="name" name="name" value={categoryObj.name}
                         onChange={handleInput} />
-                    <hr />
+                    </div>
+                     <hr />
                     <div className="form_submit">
                         <input type="submit" value="submit" className="category_submit" />
                     </div>
+                    {/* <div className="table_category"> */}
 
-                    <div className="table_category">
+                    <table className="home_table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                categoryArr.map((value) => {
+                                    return (<tr key={value.categoryId}>
+                                        <td className="td_cat">{value.name}</td>
+                                        <td> <RiEdit2Line className="edit_cat" onClick={() => editCategory(value.categoryId)} />
+                                            <RiDeleteBin5Line className="delete_cat" onClick={() => deleteCategroy(value.categoryId)} />
+                                        </td>
+                                    </tr>)
+                                })
+                            }
 
-                        <table className="table_cate">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    categoryArr.map((value) => {
-                                        return (<tr key={value.categoryId}>
-                                            <td className="td_cat">{value.name}</td>
-                                            <td> <RiEdit2Line className="edit_cat" onClick={() => editCategory(value.categoryId)} />
-                                                <RiDeleteBin5Line className="delete_cat" onClick={() => deleteCategroy(value.categoryId)} />
-                                            </td>
-                                        </tr>)
-                                    })
-                                }
-
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
+                {/* </div> */}
                 </div>
+                
+
 
             </form>
 
-
+            </div>
         </>
     )
 }

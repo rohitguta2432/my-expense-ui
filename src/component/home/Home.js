@@ -7,6 +7,7 @@ import './Home.css'
 const Home = () => {
     return (
         <>
+        <div class="nakul"></div>
             <Navbar />
             <Dashboard />  
             <Dashboardtable />
